@@ -63,7 +63,7 @@ def get_world_data(world_data, coordinates):
     data.rename(columns={'Series Name': 'SeriesName'},inplace=True)
     data['Year']=data['Year'].astype(int)
     data['Values']=data['Values'].astype(float)
-    data.to_json("../Resources/data_clean.json", orient="index", indent=4)
+    #data.to_json("../Resources/data_clean.json", orient="index", indent=4)
     return data
 
 def get_gender_data(filename):
