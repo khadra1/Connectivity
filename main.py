@@ -11,7 +11,7 @@ def world_data_processor(filename):
     '''
     # Import the world internet data from world bank and rename columns for merging with location data
 
-    world_data = pd.read_csv(f'./db/{filename}', skipfooter=446, engine="python")
+    world_data = pd.read_csv(f'/db/{filename}', skipfooter=446, engine="python")
     world_data = world_data.replace("..", 0)
     # Rename the Country and Country Codes column to allow merging later on
     world_data.rename(
@@ -33,7 +33,7 @@ def coordinate_processor(filename):
 
     # Import the coordinate csv file, rename columns for merging with each other later on
 
-    coordinates = pd.read_csv(f'./db/{filename}')
+    coordinates = pd.read_csv(f'/db/{filename}')
     # Rename the Country Codes column to allow merging later on and long/lat for clarity
     coordinates.rename(
         columns={'iso_con': 'Codes', 'lat': 'Latitude', 'lon': 'Longitude'}, inplace=True)
@@ -71,7 +71,7 @@ def get_gender_data(filename):
     '''
 
  # Reading the ITU excel file age and gender sheet to clean and turn into json object
-    gender_df = pd.read_excel(f'./db/{filename}', skiprows=(0,1), sheet_name="Internet use by sex & age")
+    gender_df = pd.read_excel(f'/db/{filename}', skiprows=(0,1), sheet_name="Internet use by sex & age")
    # Get the gender tables from the excel file
     gender_df=gender_df.iloc[0:16,0:18] 
     gender_df.drop(gender_df.columns[[1,2,3,4,5,6,7,8]],axis=1,inplace=True)
@@ -88,7 +88,7 @@ def get_age_data(filename):
     :return: age_df dataframe
     '''
 
-    age_df = pd.read_excel(f'./db/{filename}', skiprows=range(0,19),skipfooter=10 , sheet_name="Internet use by sex & age")
+    age_df = pd.read_excel(f'/db/{filename}', skiprows=range(0,19),skipfooter=10 , sheet_name="Internet use by sex & age")
     age_table_name=age_df.iloc[0,0]
     # Get the age tables from the gender_age excel file
     age_df = age_df.iloc[3:17,0:8]
@@ -106,7 +106,7 @@ def get_world_bank_region_data(filename):
     :return: regions_data dataframe
     '''
 
-    global_regions = pd.read_excel(f'./db/{filename}', skipfooter=5 , sheet_name='Data')
+    global_regions = pd.read_excel(f'/db/{filename}', skipfooter=5 , sheet_name='Data')
     ## Remove the brackets and the duplicated value in the Year columns 
     global_regions = global_regions.rename(columns={col: col.split('[')[0] for col in global_regions.columns})
     # Remove space in Year columns
@@ -145,7 +145,7 @@ def get_world_bank_countries_data(filename):
     '''
 
     # Reading the World Bank Countries excel file into DataFrame
-    global_countries = pd.read_excel(f'./db/{filename}', skipfooter=5 , sheet_name='Data')
+    global_countries = pd.read_excel(f'/db/{filename}', skipfooter=5 , sheet_name='Data')
     # Remove the brackets and the duplicated value in the Year columns 
     global_countries = global_countries.rename(columns={col: col.split('[')[0] for col in global_countries.columns})
     # Remove space in Year columns
@@ -166,7 +166,7 @@ def get_world_bank_countries_data(filename):
 
 def get_region_tables(filename):   
      # Reading the ITU excel file region sheet to clean and turn into json object
-    temp_df = pd.read_excel(f'./db/{filename}', header=None, sheet_name="By BDT region")
+    temp_df = pd.read_excel(f'/db/{filename}', header=None, sheet_name="By BDT region")
     temp_df = temp_df.iloc[2:-14,0:18].copy()
     temp_df.reset_index(drop=True, inplace=True)
 
